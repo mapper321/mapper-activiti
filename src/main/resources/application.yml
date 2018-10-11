@@ -38,6 +38,8 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
 #    default-property-inclusion: non-null
+  activiti:
+    process-definition-location-prefix: /
 mybatis:
   mapper-locations: classpath*:com/mapper/*/*/data/*.map.xml
   typeAliasesPackage: com.mapper.*.*.data
