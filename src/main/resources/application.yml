@@ -1,0 +1,50 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: activiti
+  thymeleaf: 
+    cache: false
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/public/
+    suffix: .html   
+  cloud:
+    zookeeper:
+      connect-string: 140.143.35.107:2181
+  datasource:
+    name: test
+    url: jdbc:mysql://cdb-o742k9kc.bj.tencentcdb.com:10035/daily?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: mapper321
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+#    default-property-inclusion: non-null
+mybatis:
+  mapper-locations: classpath*:com/mapper/*/*/data/*.map.xml
+  typeAliasesPackage: com.mapper.*.*.data
+security:
+  basic:
+    enabled: false
+#logging:
+#  level:
+#    root: debug
+#  file: welcome.log 
