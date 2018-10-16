@@ -3,15 +3,12 @@ server:
 spring:
   application:
     name: activiti
+  resources:
+        static-locations: classpath:/static/,classpath:/public/,classpath:/templates/
   thymeleaf: 
     cache: false
-    check-template-location: true
-    content-type: text/html
-    enabled: true
     encoding: UTF-8
-    mode: HTML5
-    prefix: classpath:/public/
-    suffix: .html   
+    mode: LEGACYHTML5
   cloud:
     zookeeper:
       connect-string: 140.143.35.107:2181
@@ -38,8 +35,8 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
 #    default-property-inclusion: non-null
-  activiti:
-    process-definition-location-prefix: /
+#  activiti:
+#    process-definition-location-prefix: /
 mybatis:
   mapper-locations: classpath*:com/mapper/*/*/data/*.map.xml
   typeAliasesPackage: com.mapper.*.*.data
