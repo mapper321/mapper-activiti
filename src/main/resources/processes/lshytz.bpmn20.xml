@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ciied="com.ibm.ilog.elixir.diagram" xmlns:fg="bpm.graphic" xmlns:bg="bpm.graphic" xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:ht="http://www.jee-soft.cn/BPMN20EXT" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:activiti="http://activiti.org/bpmn" targetNamespace="http://activiti.org/bpmn20" xsi:schemaLocation="http://www.jee-soft.cn/BPMN20EXT BPMN20EXT.xsd">
+  <process  id="lshytz" name="涓存椂浼氳閫氱煡">
+    <extensionElements>
+      <activiti:executionListener event="start" class="com.vito.platform.service.bpm.listener.StartEventListener"/>
+      <activiti:executionListener event="end" class="com.vito.platform.service.bpm.listener.EndEventListener"/>
+    </extensionElements>
+    <startEvent activiti:initiator="startUser" id="StartEvent1" name="寮€濮?"/>
+    <endEvent id="EndEvent1" name="缁撴潫1"/>
+    <userTask id="UserTask1" name="鍙戝竷閫氱煡锛堥€夋嫨鏃堕棿銆佸湴鐐广€佸弬浼氫汉鍛樸€佷簨椤癸級">
+      <documentation/>
+      <extensionElements>
+        <activiti:taskListener class="com.vito.platform.service.bpm.listener.TaskCreateListener" event="create"/>
+        <activiti:taskListener class="com.vito.platform.service.bpm.listener.TaskAssignListener" event="assignment"/>
+        <activiti:taskListener class="com.vito.platform.service.bpm.listener.TaskCompleteListener" event="complete"/>
+        <ht:order>0</ht:order>
+      </extensionElements>
+    </userTask>
+    <userTask id="UserTask3" name="澶囨">
+      <documentation/>
+      <extensionElements>
+        <activiti:taskListener class="com.vito.platform.service.bpm.listener.TaskCreateListener" event="create"/>
+        <activiti:taskListener class="com.vito.platform.service.bpm.listener.TaskAssignListener" event="assignment"/>
+        <activiti:taskListener class="com.vito.platform.service.bpm.listener.TaskCompleteListener" event="complete"/>
+        <ht:order>0</ht:order>
+      </extensionElements>
+    </userTask>
+    <userTask id="SignTask1" name="浼氱浠诲姟1">
+      <extensionElements>
+        <activiti:taskListener class="com.vito.platform.service.bpm.listener.TaskSignCreateListener" event="create"/>
+        <activiti:taskListener class="com.vito.platform.service.bpm.listener.TaskAssignListener" event="assignment"/>
+        <activiti:taskListener class="com.vito.platform.service.bpm.listener.TaskCompleteListener" event="complete"/>
+        <ht:order>0</ht:order>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics activiti:elementVariable="assignee" isSequential="false" activiti:collection="${taskUserAssignService.getSignUser(execution)}">
+        <completionCondition>${signComplete.isComplete(execution) }</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow sourceRef="StartEvent1" targetRef="UserTask1" id="sequenceFlow1" name=""/>
+    <sequenceFlow sourceRef="UserTask3" targetRef="EndEvent1" id="sequenceFlow2" name=""/>
+    <sequenceFlow sourceRef="UserTask1" targetRef="SignTask1" id="sequenceFlow3" name=""/>
+    <sequenceFlow sourceRef="SignTask1" targetRef="UserTask3" id="sequenceFlow4" name=""/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_lshytz">
+    <bpmndi:BPMNPlane bpmnElement="lshytz" id="BPMNPlane_lshytz">
+      <bpmndi:BPMNShape bpmnElement="StartEvent1" id="BPMNShape_StartEvent1">
+        <omgdc:Bounds width="33" height="33" x="100" y="65"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent1" id="BPMNShape_EndEvent1">
+        <omgdc:Bounds width="34" height="34" x="563" y="64.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask1" id="BPMNShape_UserTask1">
+        <omgdc:Bounds height="50" width="90" x="173" y="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask3" id="BPMNShape_UserTask3">
+        <omgdc:Bounds height="50" width="90" x="433" y="56.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SignTask1" id="BPMNShape_SignTask1">
+        <omgdc:Bounds height="50" width="90" x="303" y="56.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow1" id="BPMNEdge_sequenceFlow1">
+<omgdi:waypoint x="133.0" y="81.5"></omgdi:waypoint>
+
+<omgdi:waypoint x="173.0" y="75.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel> <omgdc:Bounds x="-50" y="0" width="100" height="14"></omgdc:Bounds></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow2" id="BPMNEdge_sequenceFlow2">
+<omgdi:waypoint x="523.0" y="81.5"></omgdi:waypoint>
+
+<omgdi:waypoint x="563.0" y="81.5"></omgdi:waypoint>
+        <bpmndi:BPMNLabel> <omgdc:Bounds x="-50" y="0" width="100" height="14"></omgdc:Bounds></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow3" id="BPMNEdge_sequenceFlow3">
+<omgdi:waypoint x="263.0" y="75.0"></omgdi:waypoint>
+
+<omgdi:waypoint x="303.0" y="81.5"></omgdi:waypoint>
+        <bpmndi:BPMNLabel> <omgdc:Bounds x="-50" y="0" width="100" height="14"></omgdc:Bounds></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow4" id="BPMNEdge_sequenceFlow4">
+<omgdi:waypoint x="393.0" y="81.5"></omgdi:waypoint>
+
+<omgdi:waypoint x="433.0" y="81.5"></omgdi:waypoint>
+        <bpmndi:BPMNLabel> <omgdc:Bounds x="-50" y="0" width="100" height="14"></omgdc:Bounds></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
