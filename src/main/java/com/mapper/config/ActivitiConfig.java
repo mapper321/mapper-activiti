@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.mapper.listener.MyEventListener;
+import com.mapper.process.listener.MyEventListener;
 import com.mapper.vo.ActivitiIdGenerator;
 
 @Configuration

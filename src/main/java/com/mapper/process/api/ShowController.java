@@ -1,4 +1,4 @@
-package com.mapper.process;
+package com.mapper.process.api;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,11 +26,16 @@ import org.activiti.image.ProcessDiagramGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
-@RequestMapping("/show/")
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 
+@Controller
+@RequestMapping("/api/model/")
+@Api(tags={"流程办理图片接口"})
 public class ShowController {
 	@Autowired
 	private ProcessEngine processEngine;
@@ -51,8 +56,10 @@ public class ShowController {
 	@Autowired
 	private ProcessEngineConfiguration processEngineConfiguration;
 
-	@RequestMapping("pic")
-	public void test(HttpServletResponse response, @RequestParam("processInstanceId") String processInstanceId)
+	@RequestMapping(value = "showprocess",method=RequestMethod.GET)
+	@ApiOperation(value="展示办理过程",notes="根据流程实例id返回办理过程图片流")
+	@ApiImplicitParam(name = "processInstanceId", value = "流程实例id", required = true,paramType="query")
+	public void showprocess(HttpServletResponse response, @RequestParam("processInstanceId") String processInstanceId)
 			throws Exception {
 		// 获取历史流程实例
 		HistoricProcessInstance processInstance = historyService.createHistoricProcessInstanceQuery()
