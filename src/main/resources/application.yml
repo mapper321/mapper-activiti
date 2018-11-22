@@ -9,6 +9,7 @@ spring:
     cache: false
     encoding: UTF-8
     mode: LEGACYHTML5
+    enabled: true
   cloud:
     zookeeper:
       connect-string: 140.143.35.107:2181

@@ -74,7 +74,7 @@ public class ModelerController implements RestServiceController<Model, String>{
                 "http://b3mn.org/stencilset/bpmn2.0#");
         editorNode.put("stencilset", stencilSetNode);
         repositoryService.addModelEditorSource(id,editorNode.toString().getBytes("utf-8"));
-        return ToWeb.buildResult().redirectUrl("/editor?modelId="+id);
+        return ToWeb.buildResult().redirectUrl("editor?modelId="+id);
     }
 
 
